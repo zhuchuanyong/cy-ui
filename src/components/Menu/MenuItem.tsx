@@ -11,7 +11,12 @@ export interface MenuItemProps {
 
 const MenuItem: React.FC<MenuItemProps> = (props) => {
   const { index, disabled, classname, style, children } = props;
+  console.log(MenuContext);
+
+  // 用useContext方法 获取父组件传过来的 content值
   const context = useContext(MenuContext);
+  console.log(context);
+  console.log("--------------------");
   const classes = classNames("menu-item", classNames, {
     "is-disabled": disabled,
     "is-active": context.index === index,

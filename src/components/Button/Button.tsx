@@ -1,10 +1,13 @@
 import React from "react";
 import classnames from "classnames";
+
+//  按钮大小
 export enum Buttonsize {
   large = "lg",
   Small = "sm",
 }
 
+// 按钮类型
 export enum ButtonType {
   Primary = "primary",
   Default = "default",
@@ -12,6 +15,7 @@ export enum ButtonType {
   Link = "link",
 }
 
+// 定义按钮属性
 interface BaseButtonProps {
   className?: string;
   disabled?: boolean;
@@ -21,6 +25,7 @@ interface BaseButtonProps {
   href?: string;
 }
 
+//! 将自定义属性和原生html属性合并
 // button 属性和原生button属性
 type NativeButtonProps = BaseButtonProps &
   React.ButtonHTMLAttributes<HTMLElement>;
@@ -41,7 +46,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     href,
     ...restProps
   } = props;
-  console.log(props);
+  // console.log(props);
 
   // btn , btn-lg
   const classs = classnames("btn", className, {
@@ -49,7 +54,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     [`btn-${size}`]: size,
     disabled: btnType === ButtonType.Link && disabled,
   });
-  console.log(classs);
+  // console.log(classs);
 
   if (btnType === ButtonType.Link && href) {
     return (

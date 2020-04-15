@@ -1,7 +1,10 @@
 import React, { useState, createContext } from "react";
 import classNames from "classnames";
 
+// 定义菜单模式
 type MenuMode = "horizontal" | "vertical";
+
+// 定义函数类型
 type SelectCallback = (selectedIndex: number) => void;
 
 interface ImenuContext {
