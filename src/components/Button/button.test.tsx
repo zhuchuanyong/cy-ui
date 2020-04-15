@@ -5,6 +5,7 @@ import Button from './Button'
 const defaultProps = {
   onClick: jest.fn()
 }
+
 describe('test 组件button', () => {
   it('默认', () => {
     const wrapper = render(<Button {...defaultProps}>Nice</Button>)
