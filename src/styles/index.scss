@@ -1,9 +1,11 @@
 // _.scss 告诉编译器不编译到css文件只能被导入
-@import './variables';
-@import './reboot';
-@import './mixin';
-@import './animation';
-
+@import "./variables";
+@import "./reboot";
+@import "./mixin";
+@import "./animation";
 
 // button 样式
-@import '../components//Button/style'
+@import "../components//Button/style";
+
+// menu
+@import "../components/Menu/style";

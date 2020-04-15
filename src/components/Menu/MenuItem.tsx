@@ -1,6 +1,6 @@
 import React, { Component, useContext } from "react";
 import classNames from "classnames";
-import { MenuContext } from "./amenu";
+import { MenuContext } from "./Menu";
 
 export interface MenuItemProps {
   index: number; // 用来判断是否激活点击状态
