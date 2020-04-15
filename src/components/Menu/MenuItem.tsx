@@ -1,9 +1,9 @@
 import React, { Component, useContext } from "react";
 import classNames from "classnames";
-import { MenuContext } from "./menu";
+import { MenuContext } from "./amenu";
 
 export interface MenuItemProps {
-  index: number;
+  index: number; // 用来判断是否激活点击状态
   disabled?: boolean;
   classname?: string;
   style?: React.CSSProperties;
