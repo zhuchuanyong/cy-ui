@@ -2,17 +2,20 @@ import React from "react";
 import Button, { ButtonType, Buttonsize } from "./components/Button/Button";
 import MenuItem from "./components/Menu/MenuItem";
 import Menu from "./components/Menu/Menu";
+import SubMenu from "./components/Menu/SubMenu";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <Menu mode="vertical" defaultIndex={0}>
-          <MenuItem index={0}>中国</MenuItem>
-          <MenuItem disabled index={1}>
-            山东
-          </MenuItem>
-          <MenuItem index={2}>滕州</MenuItem>
+          <MenuItem>中国</MenuItem>
+          <MenuItem disabled>山东</MenuItem>
+          <SubMenu title="山东">
+            <MenuItem>济南</MenuItem>
+            <MenuItem>青岛</MenuItem>
+          </SubMenu>
+          <MenuItem>滕州</MenuItem>
         </Menu>
         <Button autoFocus>hello</Button>
         <Button

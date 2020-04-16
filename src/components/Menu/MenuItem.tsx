@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { MenuContext } from "./Menu";
 
 export interface MenuItemProps {
-  index: number; // 用来判断是否激活点击状态
+  index?: number; // 用来判断是否激活点击状态
   disabled?: boolean;
   classname?: string;
   style?: React.CSSProperties;
@@ -11,19 +11,16 @@ export interface MenuItemProps {
 
 const MenuItem: React.FC<MenuItemProps> = (props) => {
   const { index, disabled, classname, style, children } = props;
-  console.log(MenuContext);
 
   // 用useContext方法 获取父组件传过来的 content值
   const context = useContext(MenuContext);
-  console.log(context);
-  console.log("--------------------");
-  const classes = classNames("menu-item", classNames, {
+  const classes = classNames("menu-item", classname, {
     "is-disabled": disabled,
     "is-active": context.index === index,
   });
 
   const handldClick = () => {
-    if (context.onSelect && !disabled) {
+    if (context.onSelect && !disabled && typeof index === "number") {
       context.onSelect(index);
     }
   };
@@ -34,4 +31,5 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
   );
 };
 
+MenuItem.displayName = "MenuItem";
 export default MenuItem;
