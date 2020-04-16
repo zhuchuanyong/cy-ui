@@ -11,6 +11,7 @@ type SelectCallback = (selectedIndex: number) => void;
 interface ImenuContext {
   index: number;
   onSelect?: SelectCallback;
+  mode?: MenuMode;
 }
 
 // 引入Context  向子组件传值/事件
@@ -39,6 +40,7 @@ const Menu: React.FC<MenuProps> = (props) => {
   const passedContext: ImenuContext = {
     index: currentActive ? currentActive : 0,
     onSelect: handleClick,
+    mode: mode,
   };
 
   /**

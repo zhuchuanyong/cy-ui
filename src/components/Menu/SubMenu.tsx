@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import classNames from "classnames";
 import { MenuContext } from "./Menu";
 import { MenuItemProps } from "./MenuItem";
@@ -13,11 +13,42 @@ const SubMenu: React.FC<SubMenuProps> = ({
   className,
   children,
 }) => {
+  const [menuOpen, setOpen] = useState(false);
   const context = useContext(MenuContext);
   const classes = classNames("menu-item submenu-item", className, {
     "is-active": context.index === index,
   });
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(!menuOpen);
+  };
+  let timmer: any;
+  const handleMouse = (e: React.MouseEvent, toggle: boolean) => {
+    clearTimeout(timmer);
+    e.preventDefault();
+    timmer = setTimeout(() => {
+      setOpen(toggle);
+    }, 300);
+  };
+
+  const clickEvents =
+    context.mode === "vertical" ? { onClick: handleClick } : {};
+  const hoverEvents =
+    context.mode !== "vertical"
+      ? {
+          onMouseEnter: (e: React.MouseEvent) => {
+            handleMouse(e, true);
+          },
+          onMouseLeave: (e: React.MouseEvent) => {
+            handleMouse(e, false);
+          },
+        }
+      : {};
   const renderChildren = () => {
+    const subMenuClasses = classNames("menu-submenu", {
+      "menu-opened": menuOpen,
+    });
     const childrenComponent = React.Children.map(children, (child, index) => {
       const childElement = child as React.FunctionComponentElement<
         MenuItemProps
@@ -30,11 +61,13 @@ const SubMenu: React.FC<SubMenuProps> = ({
         console.error("Warning: menu has child which is not a menuItem");
       }
     });
-    return <ul className="menu-submenu">{childrenComponent}</ul>;
+    return <ul className={subMenuClasses}>{childrenComponent}</ul>;
   };
   return (
-    <li key={index} className={classes}>
-      <div className="submenu-title">{title}</div>
+    <li key={index} className={classes} {...hoverEvents}>
+      <div className="submenu-title" {...clickEvents}>
+        {title}
+      </div>
       {renderChildren()}
     </li>
   );
