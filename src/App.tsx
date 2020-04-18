@@ -1,5 +1,6 @@
-import React from "react";
-import Button, { ButtonType, Buttonsize } from "./components/Button/Button";
+import React, { useState } from "react";
+import Button from "./components/Button/Button";
+// import Transition from "./components/Transition/Transition";
 import MenuItem from "./components/Menu/MenuItem";
 import Menu from "./components/Menu/Menu";
 import SubMenu from "./components/Menu/SubMenu";
@@ -9,6 +10,7 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fas);
 
 function App() {
+  const [show, setShow] = useState(false);
   return (
     <div className="App">
       <header className="App-header">
@@ -32,19 +34,25 @@ function App() {
           hello
         </Button>
         <Button disabled>disabled button</Button>
-        <Button btnType={ButtonType.Primary} size={Buttonsize.large}>
+        <Button
+          onClick={() => {
+            setShow(!show);
+          }}
+          btnType="primary"
+          size="lg"
+        >
           Primary large
         </Button>
-        <Button btnType={ButtonType.Danger} size={Buttonsize.Small}>
+        <Button btnType="danger" size="sm">
           Danger Small
         </Button>
-        <Button btnType={ButtonType.Link} href="www.baidu.com">
+        <Button btnType="link" href="www.baidu.com">
           百度
         </Button>
-        <Button disabled btnType={ButtonType.Link} href="www.baidu.com">
+        <Button disabled btnType="link" href="www.baidu.com">
           百度
         </Button>
-
+        {/* <Transition in={show} timeout={300} animation="zoom-in-left"> */}
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -56,6 +64,7 @@ function App() {
         >
           Learn React
         </a>
+        {/* </Transition> */}
       </header>
     </div>
   );
