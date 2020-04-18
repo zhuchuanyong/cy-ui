@@ -3,11 +3,16 @@ import Button, { ButtonType, Buttonsize } from "./components/Button/Button";
 import MenuItem from "./components/Menu/MenuItem";
 import Menu from "./components/Menu/Menu";
 import SubMenu from "./components/Menu/SubMenu";
+import Icon from "./components/Icon";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+library.add(fas);
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Icon icon="coffee" theme="danger" size="10x"></Icon>
         <Menu mode="vertical" defaultOpenSubMenus={["2"]} defaultIndex="0">
           <MenuItem>中国</MenuItem>
           <MenuItem disabled>山东</MenuItem>
