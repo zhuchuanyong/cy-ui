@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Menu mode="vertical" defaultIndex={0}>
+        <Menu mode="vertical" defaultOpenSubMenus={["2"]} defaultIndex="0">
           <MenuItem>中国</MenuItem>
           <MenuItem disabled>山东</MenuItem>
           <SubMenu title="山东">

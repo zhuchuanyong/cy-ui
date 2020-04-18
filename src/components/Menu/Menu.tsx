@@ -6,41 +6,52 @@ import { MenuItemProps } from "./MenuItem";
 type MenuMode = "horizontal" | "vertical";
 
 // 定义函数类型
-type SelectCallback = (selectedIndex: number) => void;
+type SelectCallback = (selectedIndex: string) => void;
 
 interface ImenuContext {
-  index: number;
+  index: string;
   onSelect?: SelectCallback;
   mode?: MenuMode;
+  defaultOpenSubMenus?: string[];
 }
 
 // 引入Context  向子组件传值/事件
-export const MenuContext = createContext<ImenuContext>({ index: 0 });
+export const MenuContext = createContext<ImenuContext>({ index: "0" });
 
 export interface MenuProps {
-  defaultIndex?: number;
+  defaultIndex?: string;
   className?: string;
   mode?: MenuMode;
   style?: React.CSSProperties;
   onSelect?: SelectCallback;
+  defaultOpenSubMenus?: string[];
 }
 const Menu: React.FC<MenuProps> = (props) => {
-  const { defaultIndex, className, mode, style, children, onSelect } = props;
+  const {
+    defaultIndex,
+    className,
+    mode,
+    style,
+    children,
+    onSelect,
+    defaultOpenSubMenus,
+  } = props;
   const [currentActive, setActive] = useState(defaultIndex);
   const classes = classNames("menu", className, {
     "menu-vertical": mode === "vertical",
     "menu-horizontal": mode !== "vertical",
   });
-  const handleClick = (index: number) => {
+  const handleClick = (index: string) => {
     setActive(index);
     if (onSelect) {
       onSelect(index);
     }
   };
   const passedContext: ImenuContext = {
-    index: currentActive ? currentActive : 0,
+    index: currentActive ? currentActive : "0",
     onSelect: handleClick,
-    mode: mode,
+    mode,
+    defaultOpenSubMenus,
   };
 
   /**
@@ -58,7 +69,7 @@ const Menu: React.FC<MenuProps> = (props) => {
         // return child;
         //返回子组件并设置index
         return React.cloneElement(childElement, {
-          index,
+          index: index.toString(),
         });
       } else {
         return console.error("Warning: menu has child which is not a menuItem");
@@ -74,7 +85,8 @@ const Menu: React.FC<MenuProps> = (props) => {
   );
 };
 Menu.defaultProps = {
-  defaultIndex: 0,
+  defaultIndex: "0",
   mode: "horizontal",
+  defaultOpenSubMenus: [],
 };
 export default Menu;

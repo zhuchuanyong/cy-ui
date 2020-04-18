@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { MenuContext } from "./Menu";
 
 export interface MenuItemProps {
-  index?: number; // 用来判断是否激活点击状态
+  index?: string; // 用来判断是否激活点击状态
   disabled?: boolean;
   classname?: string;
   style?: React.CSSProperties;
@@ -20,7 +20,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
   });
 
   const handldClick = () => {
-    if (context.onSelect && !disabled && typeof index === "number") {
+    if (context.onSelect && !disabled && typeof index === "string") {
       context.onSelect(index);
     }
   };
