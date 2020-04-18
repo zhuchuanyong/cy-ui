@@ -2,28 +2,28 @@ import React from "react";
 import { render, RenderResult, fireEvent, wait } from "@testing-library/react";
 import Menu, { MenuProps } from "./Menu";
 import MenuItem from "./MenuItem";
-// import SubMenu from "./subMenu";
-// jest.mock("../Icon/icon", () => {
-//   return () => {
-//     return <i className="fa" />;
-//   };
-// });
-// jest.mock("react-transition-group", () => {
-//   return {
-//     CSSTransition: (props: any) => {
-//       return props.children;
-//     },
-//   };
-// });
+import SubMenu from "./SubMenu";
+jest.mock("../Icon/icon", () => {
+  return () => {
+    return <i className="fa" />;
+  };
+});
+jest.mock("react-transition-group", () => {
+  return {
+    CSSTransition: (props: any) => {
+      return props.children;
+    },
+  };
+});
 const testProps: MenuProps = {
-  defaultIndex: 0,
+  defaultIndex: "0",
   onSelect: jest.fn(),
   className: "test",
 };
 const testVerProps: MenuProps = {
-  defaultIndex: 0,
+  defaultIndex: "0",
   mode: "vertical",
-  // defaultOpenSubMenus: ["4"],
+  defaultOpenSubMenus: ["4"],
 };
 const generateMenu = (props: MenuProps) => {
   return (
@@ -31,29 +31,29 @@ const generateMenu = (props: MenuProps) => {
       <MenuItem>active</MenuItem>
       <MenuItem disabled>disabled</MenuItem>
       <MenuItem>xyz</MenuItem>
-      {/* <SubMenu title="dropdown">
+      <SubMenu title="dropdown">
         <MenuItem>drop1</MenuItem>
       </SubMenu>
       <SubMenu title="opened">
         <MenuItem>opened1</MenuItem>
-      </SubMenu> */}
+      </SubMenu>
     </Menu>
   );
 };
-// const createStyleFile = () => {
-//   const cssFile: string = `
-//     .viking-submenu {
-//       display: none;
-//     }
-//     .viking-submenu.menu-opened {
-//       display:block;
-//     }
-//   `;
-//   const style = document.createElement("style");
-//   style.type = "text/css";
-//   style.innerHTML = cssFile;
-//   return style;
-// };
+const createStyleFile = () => {
+  const cssFile: string = `
+    .viking-submenu {
+      display: none;
+    }
+    .viking-submenu.menu-opened {
+      display:block;
+    }
+  `;
+  const style = document.createElement("style");
+  style.type = "text/css";
+  style.innerHTML = cssFile;
+  return style;
+};
 let wrapper: RenderResult,
   wrapper2: RenderResult,
   menuElement: HTMLElement,
